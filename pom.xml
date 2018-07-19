@@ -1,0 +1,258 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.onenow</groupId>
+    <artifactId>learn.mehran</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+
+    <!-- PROPERTIES -->
+    <properties>
+        <this.groupId>com.onenow</this.groupId>
+        <this.artifact>learn.mehran</this.artifact>
+        <!-- versions -->
+        <version.genison>0.93</version.genison>
+        <version.testng>6.9.6</version.testng>
+        <version.maven-compiler-plugin>3.3</version.maven-compiler-plugin>
+        <version.maven-shade-plugin>2.4.1</version.maven-shade-plugin>
+        <version.maven-assembly-plugin>2.5.5</version.maven-assembly-plugin>
+        <version.maven-jar-plugin>2.4</version.maven-jar-plugin>
+        <version.docker-maven-plugin>0.3.1</version.docker-maven-plugin>
+        <version.maven-deploy-plugin>2.8.1</version.maven-deploy-plugin>
+        <version.nexus-staging-maven-plugin>1.1</version.nexus-staging-maven-plugin>
+        <version.site-maven-plugin>0.11</version.site-maven-plugin>
+        <version.testng>6.9.6</version.testng>
+        <!-- build -->
+        <build.source>1.8</build.source>
+        <build.target>1.8</build.target>
+        <!-- repositories -->
+        <git.owner>pablo-tech</git.owner>
+        <maven.staging>maven-staging</maven.staging>
+        <nexus.repoURL>http://repo.hedge.guru/nexus</nexus.repoURL>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <!-- REPOSITORY TO PULL FROM -->
+    <repositories>
+        <!-- OWN -->
+        <repository>
+            <id>nexus</id>
+            <url>${nexus.repoURL}/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <!--DEPLOY: maven-deploy-plugin -->
+    <!--https://support.sonatype.com/categories/20111718-Apache-Maven-Support-->
+    <distributionManagement>
+        <repository>
+            <id>nexusOneReleaseServer</id>
+            <name>Releases</name>
+            <url>{nexus.repoURL}/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexusOneSnapshotServer</id>
+            <name>Snapshots</name>
+            <url>${nexus.repoURL}/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>interface.sdk</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>data.maker</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>domain.event</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>exchange.broker</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>data.inquiry</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>exchange.market</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>domain.discrete</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>foundation.util</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>partner.interactivebrokers.interface</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>partner.interactivebrokers.reader</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>partner.interactivebrokers.connector</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>partner.interactivebrokers.discrete</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>partner.interactivebrokers.contract</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
+
+        <!--TEST SCOPE-->
+        <dependency>
+            <groupId>com.onenow</groupId>
+            <artifactId>foundation.credential</artifactId>
+            <version>LATEST</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- TESTING -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${version.testng}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+
+    <!-- BUILD -->
+    <build>
+        <plugins>
+
+
+            <!--  COMPILE ALL PROJECTS -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.maven-compiler-plugin}</version>
+                <configuration>
+                    <compilerArgument>-proc:none</compilerArgument>
+                    <source>${build.source}</source>
+                    <target>${build.target}</target>
+                </configuration>
+            </plugin>
+
+
+            <!-- DEPLOY: local-->
+            <!--http://www.baeldung.com/maven-deploy-nexus-->
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${version.maven-deploy-plugin}</version>
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<id>nexusOneSnapshots</id>-->
+                <!--<phase>deploy</phase>-->
+                <!--<goals>-->
+                <!--<goal>deploy</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
+                <!--</executions>-->
+                <configuration>
+                    <skip>true</skip>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/${maven.staging}</altDeploymentRepository>
+                </configuration>
+            </plugin>
+            <!--NEXUS DEPLOY: snapshots -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>nexusOneSnapshotServer</serverId>
+                    <nexusUrl>${nexus.repoURL}</nexusUrl>
+                    <!--<skipStaging>true</skipStaging>-->
+                </configuration>
+            </plugin>
+            <!--NEXUS DEPLOY: releases-->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>nexusOneReleaseServer</serverId>
+                    <nexusUrl>${nexus.repoURL}</nexusUrl>
+                    <!--<skipStaging>true</skipStaging>-->
+                </configuration>
+            </plugin>
+
+
+            <!--JAVA DOC-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>
